@@ -48,6 +48,7 @@ module "apigw" {
 
 # lambda
 module "lambda" {
-  source = "./lambda"
-  # TODO: implement
+  source                  = "./lambda"
+  apigw_rest_api_exec_arn = "${module.apigw.apigw_rest_api_exec_arn}"
+  dynamodb_table          = "${module.db.dynamodb_table_readings}"
 }
