@@ -1,21 +1,16 @@
 import React from 'react';
 import { withAuthenticator } from 'aws-amplify-react';
+import APITester from './components/api-tester/APITester';
 
-import logo from './logo.svg';
 import './App.css';
 
 const App = () => {
   const app = (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Oh, howdy!
-        </p>
-      </header>
+      <APITester />
     </div>
   );
   return app;
-}
+};
 
 export default withAuthenticator(App, true);
