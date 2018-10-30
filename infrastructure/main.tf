@@ -15,11 +15,14 @@ provider "aws" {
 }
 
 # prototype infrastructure with node-red running on a single ec2 ubuntu instance
+# this has been created manually, uncomment the following to switch to a fully managed solution
+/*****************************************
 module "prototype" {
   source             = "./prototype"
   hosted_zone        = "${var.hosted_zone}"
   prototype_hostname = "${var.prototype_hostname}"
 }
+*****************************************/
 
 # cognito
 module "auth" {
@@ -43,12 +46,13 @@ module "apigw" {
   namespace             = "${var.namespace}"
   api_stage             = "dev"
   cognito_user_pool_arn = "${module.auth.cognito_user_pool_arn}"
-  lambda_arn            = "${module.lambda.lambda_arn}"
+  lambda_arn            = "${module.api.lambda_readings_arn}"
 }
 
 # lambda
-module "lambda" {
-  source                  = "./lambda"
+module "api" {
+  source                  = "./api"
+  namespace               = "${var.namespace}"
   apigw_rest_api_exec_arn = "${module.apigw.apigw_rest_api_exec_arn}"
-  dynamodb_table          = "${module.db.dynamodb_table_readings}"
+  dynamodb_table_readings = "${module.db.dynamodb_table_readings}"
 }

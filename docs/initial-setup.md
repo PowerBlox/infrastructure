@@ -21,7 +21,7 @@ cd $GIT_ROOT
 pipenv install
 ```
 
-you're now ready to configure your aws profile
+you're now ready to configure your aws profile (see next section)
 
 ## aws profile
 

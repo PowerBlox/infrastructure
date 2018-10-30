@@ -5,11 +5,30 @@ variable cognito_identity_pool_provider {}
 
 # aws_iam_role.cognito
 resource "aws_iam_role" "cognito" {
-  name = "${var.namespace}-identity"
+  name = "${var.namespace}-tf-cognito"
 
-  assume_role_policy = "${
-    data.template_file.cognito_iam_assume_role_policy.rendered
-  }"
+  assume_role_policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "cognito-identity.amazonaws.com:aud": "${aws_cognito_identity_pool._.id}"
+        },
+        "ForAnyValue:StringLike": {
+          "cognito-identity.amazonaws.com:amr": "authenticated"
+        }
+      }
+    }
+  ]
+}
+POLICY
 }
 
 # aws_cognito_user_pool._

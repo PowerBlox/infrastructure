@@ -33,7 +33,7 @@ resource "aws_instance" "_" {
   vpc_security_group_ids = ["${data.aws_security_group._.id}"]
   iam_instance_profile   = "${aws_iam_instance_profile.prototype.name}"
   tags {
-    Name                 = "node-red prototype01"
+    Name = "node-red prototype01"
   }
 }
 

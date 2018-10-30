@@ -4,22 +4,32 @@ variable api_stage {}
 variable cognito_user_pool_arn {}
 variable lambda_arn {}
 
+# the name of the game
 resource "aws_api_gateway_rest_api" "_" {
-  name        = "${namespace}-DeviceReadingsAPI"
+  name        = "${var.namespace}-device-api"
   description = "Proxy API with Cognito Authentication"
+}
+
+# cognito authorizer for the api
+resource "aws_api_gateway_authorizer" "_" {
+  name          = "CognitoUserPoolAuthorizer"
+  type          = "COGNITO_USER_POOLS"
+  rest_api_id   = "${aws_api_gateway_rest_api._.id}"
+  provider_arns = ["${var.cognito_user_pool_arn}"]
+}
+
+# deployment
+resource "aws_api_gateway_deployment" "_" {
+  depends_on = ["aws_api_gateway_integration.integration"]
+
+  rest_api_id = "${aws_api_gateway_rest_api._.id}"
+  stage_name  = "${var.api_stage}"
 }
 
 resource "aws_api_gateway_resource" "proxy" {
   rest_api_id = "${aws_api_gateway_rest_api._.id}"
   parent_id   = "${aws_api_gateway_rest_api._.root_resource_id}"
   path_part   = "{proxy+}"
-}
-
-resource "aws_api_gateway_authorizer" "_" {
-  name          = "CognitoUserPoolAuthorizer"
-  type          = "COGNITO_USER_POOLS"
-  rest_api_id   = "${aws_api_gateway_rest_api._.id}"
-  provider_arns = ["${var.cognito_user_pool_arn}"]
 }
 
 resource "aws_api_gateway_method" "any" {
@@ -41,11 +51,4 @@ resource "aws_api_gateway_integration" "integration" {
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = "arn:aws:apigateway:${var.region}:lambda:path/2015-03-31/functions/${var.lambda_arn}/invocations"
-}
-
-resource "aws_api_gateway_deployment" "_" {
-  depends_on = ["aws_api_gateway_integration.integration"]
-
-  rest_api_id = "${aws_api_gateway_rest_api._.id}"
-  stage_name  = "${var.api_stage}"
 }
