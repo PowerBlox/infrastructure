@@ -8,8 +8,11 @@ walk through for the infrastructure setup
 after you have installed all requirements, you can simply type:
 
 ```bash
-# to build the infrastructure
-make infrastructure
-# to destroy the infrastructure
-make destroy
+make
 ```
+
+to see the list of available commands
+
+# deploy
+
+the frontend is presently published here: http://readings-20181030115713--hostingbucket.s3-website-eu-west-1.amazonaws.com/

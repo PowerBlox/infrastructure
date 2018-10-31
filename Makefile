@@ -1,5 +1,6 @@
 CURRENT_DIR?=$(abspath .)
 INFRASTRUCTURE_DIR=infrastructure
+FRONTEND_DIR=frontend/readings
 
 help:
 	@echo "make, list of available commands (order is important!)"
@@ -9,6 +10,7 @@ help:
 	@echo "> plan:              check what needs to be done"
 	@echo "> apply:             executes changes"
 	@echo "> destroy:           destroys all infrastructure (handle with care!)"
+	@echo "> publish:           publishes the frontend"
 
 lambda-readings:
 	OUTPUT_DIR="${CURRENT_DIR}/infrastructure" make -C lambda/readings build
@@ -24,3 +26,6 @@ apply:
 
 destroy:
 	cd ${INFRASTRUCTURE_DIR} && terraform destroy
+
+publish:
+	cd ${FRONTEND_DIR} && amplify publish
