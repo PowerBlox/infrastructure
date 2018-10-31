@@ -1,10 +1,24 @@
 variable namespace {}
 variable apigw_rest_api_exec_arn {}
-variable dynamodb_table_readings {}
+variable dynamodb_table_readings_name {}
+variable dynamodb_table_readings_arn {}
+variable s3_bucket_arn {}
+variable mysql_server_arn {}
 
 variable lambda_readings_pkg {
   type    = "string"
   default = "lambda-readings.zip"
+}
+
+# data.template_file.lambda_iam_policy.rendered
+data "template_file" "lambda_iam_policy" {
+  template = "${file("${path.module}/policies/lambda.json")}"
+
+  vars {
+    s3_bucket_arn      = "${var.s3_bucket_arn}"
+    mysql_server_arn   = "${var.mysql_server_arn}"
+    dynamodb_table_arn = "${var.dynamodb_table_readings_arn}"
+  }
 }
 
 # Lambda
@@ -29,7 +43,7 @@ resource "aws_lambda_function" "readings" {
 
   environment {
     variables = {
-      DYNAMODB_TABLE = "${var.dynamodb_table_readings}"
+      DYNAMODB_TABLE = "${var.dynamodb_table_readings_name}"
     }
   }
 }
@@ -53,4 +67,17 @@ resource "aws_iam_role" "_" {
   ]
 }
 POLICY
+}
+
+# aws_iam_policy
+resource "aws_iam_policy" "_" {
+  name   = "${var.namespace}-api-lambda"
+  policy = "${data.template_file.lambda_iam_policy.rendered}"
+}
+
+# aws_iam_policy_attachment
+resource "aws_iam_policy_attachment" "_" {
+  name       = "${var.namespace}-api-lambda"
+  policy_arn = "${aws_iam_policy._.arn}"
+  roles      = ["${aws_iam_role._.name}"]
 }
