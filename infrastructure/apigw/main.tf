@@ -28,10 +28,10 @@ resource "aws_api_gateway_authorizer" "_" {
 
 # deployment
 resource "aws_api_gateway_deployment" "_" {
-  depends_on = ["aws_api_gateway_integration.integration"]
-
-  rest_api_id = "${aws_api_gateway_rest_api._.id}"
-  stage_name  = "${var.api_stage}"
+  depends_on        = ["aws_api_gateway_integration.integration"]
+  rest_api_id       = "${aws_api_gateway_rest_api._.id}"
+  stage_name        = "${var.api_stage}"
+  stage_description = "${md5(file("main.tf"))}"
 }
 
 resource "aws_api_gateway_resource" "proxy" {
