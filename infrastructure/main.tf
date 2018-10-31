@@ -94,6 +94,6 @@ data "template_file" "frontend_exports" {
 }
 
 resource "local_file" "frontend_exports" {
-  filename = "${path.cwd}/../frontend/readings/public/src/aws-resources.${var.stage_env}.js"
+  filename = "${path.cwd}/../frontend/readings/src/aws-resources.${var.stage_env}.js"
   content  = "${data.template_file.frontend_exports.rendered}"
 }

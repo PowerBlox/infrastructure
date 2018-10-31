@@ -25,7 +25,7 @@ module "mysql" {
   engine_version    = "5.7.19"
   instance_class    = "db.t2.medium"
   allocated_storage = 15
-  name              = "${var.namespace}-infrastructure"
+  name              = "infrastructure"
   username          = "${var.db_username}"
   password          = "${var.db_password}"
   port              = "3306"
