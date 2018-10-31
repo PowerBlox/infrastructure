@@ -1,14 +1,32 @@
 {
-    "providers": {
-        "awscloudformation": {
-            "AuthRoleName": "readings-20181030115348-authRole",
-            "UnauthRoleArn": "arn:aws:iam::648039538347:role/readings-20181030115348-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::648039538347:role/readings-20181030115348-authRole",
-            "Region": "eu-west-1",
-            "DeploymentBucketName": "readings-20181030115348-deployment",
-            "UnauthRoleName": "readings-20181030115348-unauthRole",
-            "StackName": "readings-20181030115348",
-            "StackId": "arn:aws:cloudformation:eu-west-1:648039538347:stack/readings-20181030115348/76315ac0-dc3a-11e8-9637-50a68645b2d2"
-        }
-    }
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "readings-20181030115348-authRole",
+			"UnauthRoleArn": "arn:aws:iam::648039538347:role/readings-20181030115348-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::648039538347:role/readings-20181030115348-authRole",
+			"Region": "eu-west-1",
+			"DeploymentBucketName": "readings-20181030115348-deployment",
+			"UnauthRoleName": "readings-20181030115348-unauthRole",
+			"StackName": "readings-20181030115348",
+			"StackId": "arn:aws:cloudformation:eu-west-1:648039538347:stack/readings-20181030115348/76315ac0-dc3a-11e8-9637-50a68645b2d2"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/readings-20181030115348-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2018-10-31T17:41:18.345Z",
+			"output": {
+				"S3BucketSecureURL": "https://readings-20181030115713--hostingbucket.s3.amazonaws.com",
+				"WebsiteURL": "http://readings-20181030115713--hostingbucket.s3-website-eu-west-1.amazonaws.com",
+				"Region": "eu-west-1",
+				"HostingBucketName": "readings-20181030115713--hostingbucket"
+			},
+			"lastPushDirHash": "7y5mvEuVdpKlJW4XhvOLbeIEDyU="
+		}
+	}
 }

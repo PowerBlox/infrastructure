@@ -11,7 +11,7 @@ class APITester extends React.Component {
     const api = new APIService();
     api.getConfig().then((response) => {
       console.log('api response', response);
-      this.setState({ value: response });
+      this.setState({ value: JSON.stringify(response, null, 2) });
     });
   }
 

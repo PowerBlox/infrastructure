@@ -14,7 +14,19 @@
 	"hosting": {
 		"S3AndCloudFront": {
 			"service": "S3AndCloudFront",
-			"providerPlugin": "awscloudformation"
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/readings-20181030115348-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2018-10-31T17:41:18.345Z",
+			"output": {
+				"S3BucketSecureURL": "https://readings-20181030115713--hostingbucket.s3.amazonaws.com",
+				"WebsiteURL": "http://readings-20181030115713--hostingbucket.s3-website-eu-west-1.amazonaws.com",
+				"Region": "eu-west-1",
+				"HostingBucketName": "readings-20181030115713--hostingbucket"
+			},
+			"lastPushDirHash": "7y5mvEuVdpKlJW4XhvOLbeIEDyU="
 		}
 	}
 }
