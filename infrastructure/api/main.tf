@@ -1,11 +1,11 @@
-variable namespace {}
-variable apigw_rest_api_exec_arn {}
-variable dynamodb_table_readings_name {}
-variable dynamodb_table_readings_arn {}
-variable s3_bucket_arn {}
-variable mysql_server_arn {}
+variable "namespace" {}
+variable "apigw_rest_api_exec_arn" {}
+variable "dynamodb_table_readings_name" {}
+variable "dynamodb_table_readings_arn" {}
+variable "s3_bucket_arn" {}
+variable "mysql_server_arn" {}
 
-variable lambda_readings_pkg {
+variable "lambda_readings_pkg" {
   type    = "string"
   default = "lambda-readings.zip"
 }

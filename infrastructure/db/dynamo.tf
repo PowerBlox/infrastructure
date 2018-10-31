@@ -1,5 +1,3 @@
-variable namespace {}
-
 resource "aws_dynamodb_table" "readings" {
   name           = "${var.namespace}-device-readings"
   read_capacity  = 20

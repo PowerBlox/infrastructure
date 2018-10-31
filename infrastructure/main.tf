@@ -1,13 +1,16 @@
-variable aws_profile {}
-variable aws_region {}
-variable hosted_zone {}
-variable prototype_hostname {}
+variable "aws_profile" {}
+variable "aws_region" {}
+variable "hosted_zone" {}
+variable "prototype_hostname" {}
 
-variable namespace {}
-variable cognito_identity_pool_name {}
-variable cognito_identity_pool_provider {}
+variable "namespace" {}
+variable "cognito_identity_pool_name" {}
+variable "cognito_identity_pool_provider" {}
 
-variable stage_env {
+variable "db_username" {}
+variable "db_password" {}
+
+variable "stage_env" {
   type    = "string"
   default = "dev"
 }
@@ -43,9 +46,11 @@ module "auth" {
 
 # db
 module "db" {
-  source    = "./db"
-  namespace = "${var.namespace}"
-  stage_env = "${var.stage_env}"
+  source       = "./db"
+  namespace   = "${var.namespace}"
+  stage_env   = "${var.stage_env}"
+  db_username = "${var.db_username}"
+  db_password = "${var.db_password}"
 }
 
 # api gateway
@@ -73,12 +78,12 @@ module "api" {
   apigw_rest_api_exec_arn      = "${module.apigw.apigw_rest_api_exec_arn}"
   dynamodb_table_readings_name = "${module.db.dynamodb_table_readings_name}"
   dynamodb_table_readings_arn  = "${module.db.dynamodb_table_readings_arn}"
+  mysql_server_arn             = "${module.db.mysql_server_arn}"
   s3_bucket_arn                = "${module.storage.s3_bucket_arn}"
-  mysql_server_arn             = "${module.db.mysql.this_db_instance_arn}"
 }
 
 data "template_file" "frontend_exports" {
-  template = "${file("${path.cwd}/templates/frontend_exports.json")}"
+  template = "${file("${path.cwd}/templates/frontend_exports.js")}"
 
   vars {
     region              = "${var.aws_region}"

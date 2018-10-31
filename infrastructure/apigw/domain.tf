@@ -1,4 +1,4 @@
-variable hosted_zone {}
+variable "hosted_zone" {}
 
 # this certificate must be defined in the us-east-1 region for an edge optimised gateway
 # https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains-prerequisites.html
@@ -13,7 +13,7 @@ resource "aws_api_gateway_domain_name" "_" {
   certificate_arn  = "${data.aws_acm_certificate.api.arn}"
 }
 
-resource "aws_api_gateway_base_path_mapping" "test" {
+resource "aws_api_gateway_base_path_mapping" "_" {
   api_id      = "${aws_api_gateway_rest_api._.id}"
   stage_name  = "${aws_api_gateway_deployment._.stage_name}"
   domain_name = "${aws_api_gateway_domain_name._.domain_name}"
@@ -23,11 +23,10 @@ data "aws_route53_zone" "_" {
   name = "${var.hosted_zone}"
 }
 
-resource "aws_route53_record" "example" {
-  zone_id = "${aws_route53_zone._.id}" # See aws_route53_zone for how to create this
-
-  name = "${aws_api_gateway_domain_name._.domain_name}"
-  type = "A"
+resource "aws_route53_record" "_" {
+  zone_id = "${data.aws_route53_zone._.id}" # See aws_route53_zone for how to create this
+  name    = "${aws_api_gateway_domain_name._.domain_name}"
+  type    = "A"
 
   alias {
     name                   = "${aws_api_gateway_domain_name._.cloudfront_domain_name}"

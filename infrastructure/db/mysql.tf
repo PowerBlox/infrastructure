@@ -1,7 +1,3 @@
-variable namespace {}
-variable stage_env {}
-
-
 data "aws_vpc" "default" {
   default = true
 }

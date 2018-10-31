@@ -1,8 +1,8 @@
-variable region {}
-variable namespace {}
-variable api_stage {}
-variable cognito_user_pool_arn {}
-variable lambda_arn {}
+variable "region" {}
+variable "namespace" {}
+variable "api_stage" {}
+variable "cognito_user_pool_arn" {}
+variable "lambda_arn" {}
 
 # the name of the game
 resource "aws_api_gateway_rest_api" "_" {

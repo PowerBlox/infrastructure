@@ -1,5 +1,5 @@
-variable hosted_zone {}
-variable prototype_hostname {}
+variable "hosted_zone" {}
+variable "prototype_hostname" {}
 
 data "aws_route53_zone" "_" {
   name = "${var.hosted_zone}"

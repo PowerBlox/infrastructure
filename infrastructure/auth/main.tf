@@ -1,7 +1,7 @@
-variable region {}
-variable namespace {}
-variable cognito_identity_pool_name {}
-variable cognito_identity_pool_provider {}
+variable "region" {}
+variable "namespace" {}
+variable "cognito_identity_pool_name" {}
+variable "cognito_identity_pool_provider" {}
 
 # aws_iam_role.cognito
 resource "aws_iam_role" "cognito" {

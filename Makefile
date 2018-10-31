@@ -6,8 +6,9 @@ help:
 	@echo "--------------------------------"
 	@echo "> lambda-readings:   builds the lambda for deployment"
 	@echo "> init:              initialise terraform modules"
-	@echo "> infrastructure:    builds with terraform"
-	@echo "> destroy:           destroys with terraform (handle with care!)"
+	@echo "> plan:              check what needs to be done"
+	@echo "> apply:             executes changes"
+	@echo "> destroy:           destroys all infrastructure (handle with care!)"
 
 lambda-readings:
 	OUTPUT_DIR="${CURRENT_DIR}/infrastructure" make -C lambda/readings build
@@ -15,7 +16,10 @@ lambda-readings:
 init:
 	cd ${INFRASTRUCTURE_DIR} && terraform init
 
-infrastructure:
+plan:
+	cd ${INFRASTRUCTURE_DIR} && terraform plan
+
+apply:
 	cd ${INFRASTRUCTURE_DIR} && terraform apply
 
 destroy:

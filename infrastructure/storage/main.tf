@@ -1,6 +1,6 @@
-variable namespace {}
+variable "namespace" {}
 
-variable stage_env {}
+variable "stage_env" {}
 
 resource "aws_s3_bucket" "logging" {
   bucket = "${var.namespace}-device-readings-${var.stage_env}-logs"
