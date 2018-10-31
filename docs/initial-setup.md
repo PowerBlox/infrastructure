@@ -39,3 +39,7 @@ pipenv run aws configure --profile power-blox
 ```
 
 repeat the same using the profile `power-blox-amplify`, both profiles are required (terraform scripts + frontend publish via aws amplify). Make sure that at the end of the process both `power-blox-amplify` and `power-blox` are configured.
+
+## other secrets
+
+for the first run, you may also need the file `infrastructure/db.auto.tfvars` which is used to setup the root account for the database server, ask your system administrator.
