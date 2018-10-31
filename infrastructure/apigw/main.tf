@@ -10,6 +10,14 @@ resource "aws_api_gateway_rest_api" "_" {
   description = "Proxy API with Cognito Authentication"
 }
 
+# add cors
+module "cors" {
+  source          = "github.com/squidfunk/terraform-aws-api-gateway-enable-cors"
+  version         = "0.1.0"
+  api_id          = "${aws_api_gateway_rest_api._.id}"
+  api_resource_id = "${aws_api_gateway_resource.proxy.id}"
+}
+
 # cognito authorizer for the api
 resource "aws_api_gateway_authorizer" "_" {
   name          = "CognitoUserPoolAuthorizer"
