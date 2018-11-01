@@ -26,6 +26,9 @@ provider "aws" {
 provider "aws" {
   alias                   = "useast1"
   region                  = "us-east-1"
+  shared_credentials_file = "~/.aws/credentials"
+  profile                 = "${var.aws_profile}"
+  version                 = "~> 1.41"
 }
 
 # prototype infrastructure with node-red running on a single ec2 ubuntu instance
