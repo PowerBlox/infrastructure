@@ -5,12 +5,12 @@ DELIVERABLE="${OUTPUT_DIR}/${OUTPUT_FILE}"
 build:
 	zip -r9 ${DELIVERABLE} . -x *__pycache__* *.pyc* test-reports/*
 
+install:
+	pipenv install
+
 clean:
 	rm -f ${DELIVERABLE}
 	pipenv --rm
-
-install:
-	pipenv install
 
 libs:
 	pipenv sync --dev

@@ -1,5 +1,10 @@
-import os
-import json
+from dotenv import load_dotenv
+
+from readings.app import app
+
+load_dotenv()
+
+
 
 def run(event, context):
     """main lambda handler, should route requests to specific functions depending on path
@@ -21,21 +26,8 @@ def run(event, context):
     :return: a processed response
     :rtype: httpresponse
     """
+    return app.handle(event)
 
-    env_vars = ['DYNAMODB_TABLE']
-    body = {
-        "event": event,
-        "env": {v: os.getenv(v) for v in env_vars}
-    }
-    return {
-        "isBase64Encoded": False,
-        "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": True,
-        },
-        "body": json.dumps(body)
-    }
 
 if __name__ == '__main__':
-    run()
+    run(None, None)
