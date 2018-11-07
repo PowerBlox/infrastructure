@@ -35,11 +35,12 @@ resource "aws_lambda_permission" "apigw_lambda" {
 resource "aws_lambda_function" "readings" {
   filename         = "${var.lambda_readings_pkg}"
   function_name    = "${var.namespace}-device-readings"
-  role             = "${aws_iam_role._.arn}"
   handler          = "lambda.run"
+  role             = "${aws_iam_role._.arn}"
   runtime          = "python3.6"
-  source_code_hash = "${base64sha256(file("${var.lambda_readings_pkg}"))}"
   timeout          = 30
+  publish          = true
+  source_code_hash = "${base64sha256(file("${var.lambda_readings_pkg}"))}"
 
   environment {
     variables = {

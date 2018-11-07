@@ -1,9 +1,6 @@
 from dotenv import load_dotenv
 
-from readings.app import app
-
 load_dotenv()
-
 
 
 def run(event, context):
@@ -24,6 +21,7 @@ def run(event, context):
     :return: a processed response
     :rtype: httpresponse
     """
+    from readings.app import app
     return app.handle(event)
 
 
