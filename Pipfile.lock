@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8387b3d0f21822d26b86ac12ec8a2bee41ab5146c6f783cf64ceb241b6cc42b4"
+            "sha256": "38f55743c2ff0127143e76dbd159bdd2d67b0cff24721c7796b5e464265f7af6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -17,9 +17,8 @@
     },
     "default": {
         "alphorn": {
-            "editable": true,
             "git": "ssh://git@github.com/grudelsud/alphorn.git",
-            "ref": "b6c57c0fc3393dc6794e5777a569dfe52fb1b70b"
+            "ref": "b4c24c8bab9f7b6ccce3c7db0e962607233e7131"
         },
         "asn1crypto": {
             "hashes": [
@@ -30,26 +29,26 @@
         },
         "awscli": {
             "hashes": [
-                "sha256:678d178e05440b4912d218d81feb2106b59050d7435f4f424c45afb9906113da",
-                "sha256:915c4449c82eab400247ca737c47a90e315bc3d87614d5dbdde157ebb1520b0c"
+                "sha256:842e4e313b12eb03e547df845e76c3d321fa229148da5ea94c70afb61a74b34a",
+                "sha256:c6ffe32efaa8aeeadb2b42be725a778debd080f14115ebc623213f991c4645a6"
             ],
             "index": "pypi",
-            "version": "==1.16.47"
+            "version": "==1.16.49"
         },
         "boto3": {
             "hashes": [
-                "sha256:4c45dc363daba811baeb7b6307ddf5c60beb9a43e1d0707d0786cd9acb20b563",
-                "sha256:767bc7273d4a3580d87b605bfe240745dcbdd7828e1dc85fa69ae692f56cfd00"
+                "sha256:137087f617cb43d9ea20407ed285d1f6c3948a89e6b01e3d769e82f9c5b588d7",
+                "sha256:c67c2f7a8e60c3273424e4d8f0ef7830e52f106e4a1368855d15233ab99422a5"
             ],
             "index": "pypi",
-            "version": "==1.9.37"
+            "version": "==1.9.39"
         },
         "botocore": {
             "hashes": [
-                "sha256:a256dbe50b05111a53640ac5defd71aa589d1fab27bd7df7310d7f0da72447a7",
-                "sha256:eed1b39027ee882ebd0df10dcb7307db20fc4b468debae513dc183743e850d17"
+                "sha256:37bd07c308cc36cbb4e02fd659ed11716ff8e93c70dd28a813e41742e39e8254",
+                "sha256:eb03315ab64cc7c4941a44e8f3a564347337a6463e729aee5b3f047c8f68960f"
             ],
-            "version": "==1.12.37"
+            "version": "==1.12.39"
         },
         "cffi": {
             "hashes": [

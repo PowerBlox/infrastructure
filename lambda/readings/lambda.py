@@ -8,8 +8,6 @@ load_dotenv()
 
 def run(event, context):
     """main lambda handler, should route requests to specific functions depending on path
-    the implementation is beyond the scope of this demo, but in case it's needed, this
-    seems to be a good starting point: https://github.com/trustpilot/python-lambdarest
 
     for details of contents received in the event dictionary when integrated with api gw
     check https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html

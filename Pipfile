@@ -6,10 +6,10 @@ name = "pypi"
 [packages]
 awscli = "*"
 python-dotenv = "*"
-alphorn = {editable = true, git = "ssh://git@github.com/grudelsud/alphorn.git"}
 sqlalchemy = "*"
 "boto3" = "*"
 pymysql = "*"
+alphorn = {git = "ssh://git@github.com/grudelsud/alphorn.git"}
 
 [dev-packages]
 pylint = "*"

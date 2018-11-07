@@ -14,7 +14,12 @@ help:
 	@echo "> destroy:           destroys all infrastructure (handle with care!)"
 
 lambda-readings:
-	OUTPUT_DIR="${CURRENT_DIR}/infrastructure" make -C lambda/readings build
+	# ------------------------------------------------
+	# use the following if building on a linux system
+	# OUTPUT_DIR="${CURRENT_DIR}/infrastructure" make -C lambda/readings all
+	# ------------------------------------------------
+	# use the following if building on any other system
+	make -C lambda/readings build_with_docker
 
 publish:
 	cd ${FRONTEND_DIR} && amplify publish
