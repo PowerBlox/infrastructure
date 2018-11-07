@@ -5,7 +5,7 @@ import './APITester.css';
 class APITester extends React.Component {
   state = {
     value: 'make API calls at the press of a button',
-    deviceId: null,
+    deviceId: '',
   }
 
   clickEchoVars = () => {
@@ -13,7 +13,12 @@ class APITester extends React.Component {
     api.echoVars().then((response) => {
       this.setState({
         value: JSON.stringify(response, null, 2),
-        deviceId: null,
+        deviceId: '',
+      });
+    }).catch(() => {
+      this.setState({
+        value: 'error while reading from the api',
+        deviceId: '',
       });
     });
   }
@@ -23,7 +28,12 @@ class APITester extends React.Component {
     api.devices().then((response) => {
       this.setState({
         value: JSON.stringify(response, null, 2),
-        deviceId: null,
+        deviceId: '',
+      });
+    }).catch(() => {
+      this.setState({
+        value: 'error while reading from the api',
+        deviceId: '',
       });
     });
   }
@@ -35,11 +45,16 @@ class APITester extends React.Component {
       api.readings(deviceId).then((response) => {
         this.setState({
           value: JSON.stringify(response, null, 2),
-          deviceId: null,
+          deviceId: '',
+        });
+      }).catch(() => {
+        this.setState({
+          value: 'error while reading from the api',
+          deviceId: '',
         });
       });
     } else {
-      this.setState({ value: 'you need to enter a device ID first' });
+      this.setState({ value: 'you need to enter a device ID: get the list of devices first, then enter one of the available id as listed in the response' });
     }
   }
 
@@ -57,9 +72,11 @@ class APITester extends React.Component {
             <button type="button" onClick={this.clickEchoVars}>
               Echo Vars
             </button>
+            <br />
             <button type="button" onClick={this.clickGetDevices}>
               Get Devices
             </button>
+            <br />
             <input type="text" value={deviceId} onChange={this.changeDeviceId} />
             <button type="button" onClick={this.clickGetReadings}>
               Get Readings
