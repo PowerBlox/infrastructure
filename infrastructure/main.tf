@@ -19,7 +19,7 @@ provider "aws" {
   region                  = "${var.aws_region}"
   shared_credentials_file = "~/.aws/credentials"
   profile                 = "${var.aws_profile}"
-  version                 = "~> 1.41"
+  version                 = "~> 1.43"
 }
 
 # used to fetch ssl certificates for global endpoints (must be defined in us east 1)
@@ -28,7 +28,7 @@ provider "aws" {
   region                  = "us-east-1"
   shared_credentials_file = "~/.aws/credentials"
   profile                 = "${var.aws_profile}"
-  version                 = "~> 1.41"
+  version                 = "~> 1.43"
 }
 
 # prototype infrastructure with node-red running on a single ec2 ubuntu instance
@@ -82,6 +82,7 @@ module "api" {
   dynamodb_table_readings_name = "${module.db.dynamodb_table_readings_name}"
   dynamodb_table_readings_arn  = "${module.db.dynamodb_table_readings_arn}"
   mysql_server_arn             = "${module.db.mysql_server_arn}"
+  mysql_server_endpoint        = "${module.db.mysql_server_endpoint}"
   s3_bucket_arn                = "${module.storage.s3_bucket_arn}"
 }
 

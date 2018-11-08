@@ -11,7 +11,6 @@
       "Resource": "arn:aws:logs:*:*:*"
     },
     {
-      "Sid": "ListAndDescribe",
       "Effect": "Allow",
       "Action": [
           "dynamodb:List*",
@@ -22,7 +21,6 @@
       "Resource": "*"
     },
     {
-      "Sid": "SpecificTable",
       "Effect": "Allow",
       "Action": [
           "dynamodb:BatchGet*",
@@ -52,6 +50,16 @@
         "s3:DeleteObject"
       ],
       "Resource": ["${s3_bucket_arn}/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DetachNetworkInterface",
+        "ec2:DeleteNetworkInterface"
+      ],
+      "Resource": ["*"]
     },
     {
       "Effect": "Allow",
