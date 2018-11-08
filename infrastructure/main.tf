@@ -49,7 +49,8 @@ module "auth" {
 
 # db
 module "db" {
-  source       = "./db"
+  source      = "./db"
+  region      = "${var.aws_region}"
   namespace   = "${var.namespace}"
   stage_env   = "${var.stage_env}"
   db_username = "${var.db_username}"
