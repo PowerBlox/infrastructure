@@ -2,6 +2,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+# MYSQL_HOST includes port and is defined in this lambda env, everything else in .env
 ENGINE = create_engine('mysql+pymysql://{username}:{password}@{host}/{database}'.format(
     username=os.getenv('MYSQL_USERNAME'),
     password=os.getenv('MYSQL_PASSWORD'),
