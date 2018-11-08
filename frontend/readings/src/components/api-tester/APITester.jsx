@@ -5,51 +5,61 @@ import './APITester.css';
 class APITester extends React.Component {
   state = {
     value: 'make API calls at the press of a button',
+    loading: false,
     deviceId: '',
   }
 
   clickEchoVars = () => {
+    this.setState({ loading: true });
     const api = new APIService();
     api.echoVars().then((response) => {
       this.setState({
         value: JSON.stringify(response, null, 2),
+        loading: false,
         deviceId: '',
       });
     }).catch(() => {
       this.setState({
         value: 'error while reading from the api',
+        loading: false,
         deviceId: '',
       });
     });
   }
 
   clickGetDevices = () => {
+    this.setState({ loading: true });
     const api = new APIService();
     api.devices().then((response) => {
       this.setState({
         value: JSON.stringify(response, null, 2),
+        loading: false,
         deviceId: '',
       });
     }).catch(() => {
       this.setState({
         value: 'error while reading from the api',
+        loading: false,
         deviceId: '',
       });
     });
   }
 
   clickGetReadings = () => {
+    this.setState({ loading: true });
     const { deviceId } = this.state;
     if (deviceId.length) {
       const api = new APIService();
       api.readings(deviceId).then((response) => {
         this.setState({
           value: JSON.stringify(response, null, 2),
+          loading: false,
           deviceId: '',
         });
       }).catch(() => {
         this.setState({
           value: 'error while reading from the api',
+          loading: false,
           deviceId: '',
         });
       });
@@ -63,7 +73,7 @@ class APITester extends React.Component {
   }
 
   render() {
-    const { value, deviceId } = this.state;
+    const { value, deviceId, loading } = this.state;
 
     return (
       <div className="container">
@@ -81,6 +91,11 @@ class APITester extends React.Component {
             <button type="button" onClick={this.clickGetReadings}>
               Get Readings
             </button>
+            <br />
+            { loading
+              ? 'loading from API'
+              : ''
+            }
           </div>
           <div className="panel">
             <textarea value={value} readOnly className="textArea" />

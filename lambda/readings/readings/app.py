@@ -9,8 +9,6 @@ from alphorn import Alphorn
 from .models import Device
 from .utils.sqlalchemy import get_session, row2dict
 
-# defined in lamba's env
-DYNAMODB_TABLE = os.getenv('DYNAMODB_TABLE')
 app = Alphorn()
 
 
@@ -31,7 +29,7 @@ def get_devices():
 @app.route('/readings/{device_id}')
 def get_readings(device_id):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table(DYNAMODB_TABLE)
+    table = dynamodb.Table(os.getenv('DYNAMODB_TABLE'))
 
     date_end = datetime.now()
     date_start = date_end - timedelta(days=15)
