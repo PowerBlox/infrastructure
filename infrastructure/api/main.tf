@@ -4,10 +4,24 @@ variable "dynamodb_table_readings_name" {}
 variable "dynamodb_table_readings_arn" {}
 variable "s3_bucket_arn" {}
 variable "mysql_server_arn" {}
+variable "mysql_server_endpoint" {}
 
 variable "lambda_readings_pkg" {
   type    = "string"
   default = "lambda-readings.zip"
+}
+
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnet_ids" "all" {
+  vpc_id = "${data.aws_vpc.default.id}"
+}
+
+data "aws_security_group" "default" {
+  vpc_id = "${data.aws_vpc.default.id}"
+  name   = "default"
 }
 
 # data.template_file.lambda_iam_policy.rendered
@@ -33,19 +47,25 @@ resource "aws_lambda_permission" "apigw_lambda" {
 }
 
 resource "aws_lambda_function" "readings" {
+  depends_on       = ["aws_iam_policy_attachment._"]
   filename         = "${var.lambda_readings_pkg}"
   function_name    = "${var.namespace}-device-readings"
-  role             = "${aws_iam_role._.arn}"
   handler          = "lambda.run"
+  role             = "${aws_iam_role._.arn}"
   runtime          = "python3.6"
-  source_code_hash = "${base64sha256(file("${var.lambda_readings_pkg}"))}"
   timeout          = 30
-
+  publish          = true
+  vpc_config {
+    subnet_ids         = ["${data.aws_subnet_ids.all.ids}"]
+    security_group_ids = ["${data.aws_security_group.default.id}"]
+  }
   environment {
     variables = {
       DYNAMODB_TABLE = "${var.dynamodb_table_readings_name}"
+      MYSQL_HOST     = "${var.mysql_server_endpoint}"
     }
   }
+  source_code_hash = "${base64sha256(file("${var.lambda_readings_pkg}"))}"
 }
 
 # IAM

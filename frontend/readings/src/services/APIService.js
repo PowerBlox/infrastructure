@@ -3,6 +3,9 @@ import { API, Auth } from 'aws-amplify';
 class APIService {
   endpoints = {
     config: '/config',
+    echo_vars: '/echo_vars',
+    devices: '/devices',
+    readings: '/readings',
   }
 
   static getAuthHeaders() {
@@ -25,9 +28,28 @@ class APIService {
   }
 
   getConfig() {
+    // currently not implemented, will return a 404
     return APIService
       .getAPIInit()
       .then(init => API.get(this.apiName, this.endpoints.config, init));
+  }
+
+  echoVars() {
+    return APIService
+      .getAPIInit()
+      .then(init => API.get(this.apiName, this.endpoints.echo_vars, init));
+  }
+
+  devices() {
+    return APIService
+      .getAPIInit()
+      .then(init => API.get(this.apiName, this.endpoints.devices, init));
+  }
+
+  readings(deviceId) {
+    return APIService
+      .getAPIInit()
+      .then(init => API.get(this.apiName, `${this.endpoints.readings}/${deviceId}`, init));
   }
 }
 

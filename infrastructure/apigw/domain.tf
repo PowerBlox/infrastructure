@@ -3,8 +3,6 @@ variable "hosted_zone" {}
 # this certificate must be defined in the us-east-1 region for an edge optimised gateway
 # https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains-prerequisites.html
 #
-# mh, currently broken, I've added a comment here: https://github.com/hashicorp/terraform/issues/10957#issuecomment-434752071
-/***************************************************************************************
 data "aws_acm_certificate" "api" {
   provider = "aws.useast1"
   domain   = "api.power-blox.cloud"
@@ -37,4 +35,3 @@ resource "aws_route53_record" "_" {
     evaluate_target_health = true
   }
 }
-***************************************************************************************/

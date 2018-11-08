@@ -1,10 +1,10 @@
-import os
-import json
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def run(event, context):
     """main lambda handler, should route requests to specific functions depending on path
-    the implementation is beyond the scope of this demo, but in case it's needed, this
-    seems to be a good starting point: https://github.com/trustpilot/python-lambdarest
 
     for details of contents received in the event dictionary when integrated with api gw
     check https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
@@ -21,21 +21,9 @@ def run(event, context):
     :return: a processed response
     :rtype: httpresponse
     """
+    from readings.app import app
+    return app.handle(event)
 
-    env_vars = ['DYNAMODB_TABLE']
-    body = {
-        "event": event,
-        "env": {v: os.getenv(v) for v in env_vars}
-    }
-    return {
-        "isBase64Encoded": False,
-        "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": True,
-        },
-        "body": json.dumps(body)
-    }
 
 if __name__ == '__main__':
-    run()
+    run(None, None)

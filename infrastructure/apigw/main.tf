@@ -28,10 +28,15 @@ resource "aws_api_gateway_authorizer" "_" {
 
 # deployment
 resource "aws_api_gateway_deployment" "_" {
-  depends_on        = ["aws_api_gateway_integration.integration"]
+  depends_on        = ["aws_api_gateway_integration._"]
   rest_api_id       = "${aws_api_gateway_rest_api._.id}"
   stage_name        = "${var.api_stage}"
   stage_description = "${md5(file("main.tf"))}"
+
+  # check this: https://github.com/hashicorp/terraform/issues/10674#issuecomment-290767062
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_api_gateway_resource" "proxy" {
@@ -52,7 +57,7 @@ resource "aws_api_gateway_method" "any" {
   }
 }
 
-resource "aws_api_gateway_integration" "integration" {
+resource "aws_api_gateway_integration" "_" {
   rest_api_id             = "${aws_api_gateway_rest_api._.id}"
   resource_id             = "${aws_api_gateway_resource.proxy.id}"
   http_method             = "${aws_api_gateway_method.any.http_method}"

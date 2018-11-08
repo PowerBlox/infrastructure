@@ -10,3 +10,7 @@ output "dynamodb_table_readings_arn" {
 output "mysql_server_arn" {
   value = "${module.mysql.this_db_instance_arn}"
 }
+
+output "mysql_server_endpoint" {
+  value = "${module.mysql.this_db_instance_endpoint}"
+}

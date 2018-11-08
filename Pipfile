@@ -5,8 +5,14 @@ name = "pypi"
 
 [packages]
 awscli = "*"
+python-dotenv = "*"
+sqlalchemy = "*"
+"boto3" = "*"
+pymysql = "*"
+alphorn = {git = "ssh://git@github.com/grudelsud/alphorn.git"}
 
 [dev-packages]
+pylint = "*"
 
 [requires]
 python_version = "3.6"
