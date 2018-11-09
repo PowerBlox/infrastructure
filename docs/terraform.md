@@ -1,4 +1,4 @@
-# terraform
+# Terraform
 
 assuming terraform is installed, as described in the [initial setup](./initial-setup.md) document, you want to initialise it first, then run the changes
 

@@ -1,6 +1,6 @@
-# initial setup
+# Initial setup
 
-## requirements
+## Requirements
 
 you need to have
 
@@ -25,7 +25,7 @@ pipenv install
 
 you're now ready to configure your aws profile (see next section)
 
-## aws profiles
+## AWS profiles
 
 make sure you have an AWS keypair to configure your profile for cloud access, if you don't have one, ask your system administrator. When you have your secrets, you are ready to configure your profile for programmatic access by running:
 
@@ -40,6 +40,6 @@ pipenv run aws configure --profile power-blox
 
 repeat the same using the profile `power-blox-amplify`, both profiles are required (terraform scripts + frontend publish via aws amplify). Make sure that at the end of the process both `power-blox-amplify` and `power-blox` are configured.
 
-## other secrets
+## Other secrets
 
 for the first run, you may also need the file `infrastructure/db.auto.tfvars` which is used to setup the root account for the database server, ask your system administrator.
