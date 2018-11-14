@@ -4,14 +4,15 @@ module "mysql" {
 
   identifier = "${var.namespace}-${var.stage_env}"
 
-  engine            = "mysql"
-  engine_version    = "5.7.19"
-  instance_class    = "db.t2.medium"
-  allocated_storage = 15
-  name              = "infrastructure"
-  username          = "${var.db_username}"
-  password          = "${var.db_password}"
-  port              = "3306"
+  engine              = "mysql"
+  engine_version      = "5.7.19"
+  instance_class      = "db.t2.medium"
+  allocated_storage   = 15
+  name                = "infrastructure"
+  username            = "${var.db_username}"
+  password            = "${var.db_password}"
+  port                = "3306"
+  publicly_accessible = true
 
   iam_database_authentication_enabled = true
 
