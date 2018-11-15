@@ -1,5 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
+  logicalFilePath="databaseChangeLog"
   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,4 +8,5 @@
   objectQuotingStrategy="QUOTE_ALL_OBJECTS">
 
   <include file="changeSets/000-initial-change-set.xml" relativeToChangelogFile="true"/>
+  <include file="changeSets/001-add-row-data-support.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

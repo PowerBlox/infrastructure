@@ -1,0 +1,72 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  logicalFilePath="databaseChangeLog"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+  <changeSet
+    logicalFilePath="001-add-row-data-support"
+    author="tom@deep.ventures"
+    id="1">
+    <sql>
+      alter table devices
+        add column hardware_mac_id varchar(255),
+        add column hardware_rev varchar(255),
+        add column software_ref varchar(255),
+        add column base_station_id varchar(255),
+        add column created_at datetime,
+        add column modified_at datetime,
+        add column created_by int(11),
+        add column moified_by int(11),
+        add column HARDWAREID int(11);
+    </sql>
+    <rollback>
+      alter table devices
+        drop column hardware_mac_id,
+        drop column hardware_rev,
+        drop column software_ref,
+        drop column base_station_id,
+        drop column created_at,
+        drop column modified_at,
+        drop column created_by,
+        drop column moified_by,
+        drop column HARDWAREID;
+    </rollback>
+  </changeSet>
+  <changeSet
+    logicalFilePath="001-add-row-data-support"
+    author="tom@deep.ventures"
+    id="2">
+    <sql>
+      create table node_red_import (
+        id bigint auto_increment primary key not null,
+        gbl_tsp timestamp not null default current_timestamp on update current_timestamp,
+        gtw_mac_id varchar(255),
+        pbx_mac_id varchar(255),
+        reg_00 varchar(4),
+        reg_01 varchar(4),
+        reg_18 varchar(4),
+        reg_19 varchar(4),
+        reg_1A varchar(4),
+        reg_1C varchar(4),
+        reg_1D varchar(4),
+        reg_22 varchar(4),
+        reg_40 varchar(4),
+        reg_41 varchar(4),
+        reg_4D varchar(4),
+        reg_4F varchar(4),
+        reg_50 varchar(4),
+        reg_51 varchar(4),
+        reg_79 varchar(4),
+        reg_80 varchar(4),
+        reg_81 varchar(4),
+        reg_8C varchar(4),
+        reg_8D varchar(4)
+      );
+    </sql>
+    <rollback>
+      drop table node_red_import;
+    </rollback>
+  </changeSet>
+</databaseChangeLog>
