@@ -9,4 +9,5 @@
 
   <include file="changeSets/000-initial-change-set.xml" relativeToChangelogFile="true"/>
   <include file="changeSets/001-add-row-data-support.xml" relativeToChangelogFile="true"/>
+  <include file="changeSets/002-misspell.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
