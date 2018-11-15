@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -21,4 +22,6 @@ def row2dict(row):
     d = {}
     for column in row.__table__.columns:
         d[column.name] = getattr(row, column.name)
+        if isinstance(d[column.name], datetime):
+            d[column.name] = d[column.name].isoformat()
     return d

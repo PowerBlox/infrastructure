@@ -6,7 +6,7 @@ from boto3.dynamodb.conditions import Key
 
 from alphorn import Alphorn
 
-from .models import Device
+from .models import Device, RawData
 from .utils.sqlalchemy import get_session, row2dict
 
 app = Alphorn()
@@ -24,6 +24,12 @@ def echo_vars():
 def get_devices():
     session = get_session()
     return [row2dict(row) for row in session.query(Device).all()]
+
+
+@app.route('/raw')
+def get_raw_data():
+    session = get_session()
+    return [row2dict(row) for row in session.query(RawData).order_by(RawData.gbl_tsp.desc())[:20]]
 
 
 @app.route('/readings/{device_id}')
