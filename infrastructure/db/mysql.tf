@@ -56,6 +56,11 @@ module "mysql" {
 
   parameters = [
     {
+      name = "log_bin_trust_function_creators",
+      value = "1",
+      apply_method = "pending-reboot"
+    },
+    {
       name = "character_set_client"
       value = "utf8"
     },
