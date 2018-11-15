@@ -5,6 +5,7 @@ class APIService {
     config: '/config',
     echo_vars: '/echo_vars',
     devices: '/devices',
+    raw: '/raw',
     readings: '/readings',
   }
 
@@ -44,6 +45,12 @@ class APIService {
     return APIService
       .getAPIInit()
       .then(init => API.get(this.apiName, this.endpoints.devices, init));
+  }
+
+  raw() {
+    return APIService
+      .getAPIInit()
+      .then(init => API.get(this.apiName, this.endpoints.raw, init));
   }
 
   readings(deviceId) {

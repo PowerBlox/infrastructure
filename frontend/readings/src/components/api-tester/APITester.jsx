@@ -45,6 +45,24 @@ class APITester extends React.Component {
     });
   }
 
+  clickRawData = () => {
+    this.setState({ loading: true });
+    const api = new APIService();
+    api.raw().then((response) => {
+      this.setState({
+        value: JSON.stringify(response, null, 2),
+        loading: false,
+        deviceId: '',
+      });
+    }).catch(() => {
+      this.setState({
+        value: 'error while reading from the api',
+        loading: false,
+        deviceId: '',
+      });
+    });
+  }
+
   clickGetReadings = () => {
     this.setState({ loading: true });
     const { deviceId } = this.state;
@@ -85,6 +103,10 @@ class APITester extends React.Component {
             <br />
             <button type="button" onClick={this.clickGetDevices}>
               Get Devices
+            </button>
+            <br />
+            <button type="button" onClick={this.clickRawData}>
+              Get Raw data
             </button>
             <br />
             <input type="text" value={deviceId} onChange={this.changeDeviceId} />
