@@ -1,0 +1,70 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  logicalFilePath="databaseChangeLog"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+  <changeSet
+    logicalFilePath="003-new-fields"
+    author="tom@deep.ventures"
+    id="1">
+    <sql>
+      alter table `node_red_import` change column `gbl_tsp` `glb_tsp` timestamp;
+    </sql>
+    <rollback>
+      alter table `node_red_import` change column `glb_tsp` `gbl_tsp` timestamp;
+    </rollback>
+  </changeSet>
+  <changeSet
+    logicalFilePath="003-new-fields"
+    author="tom@deep.ventures"
+    id="2">
+    <sql>
+      alter table `node_red_import`
+        add column `reg_12` tinyint(1),
+        add column `reg_13` tinyint(1),
+        add column `reg_14` tinyint(1),
+        add column `reg_15` tinyint(1),
+        add column `reg_16` tinyint(1),
+        add column `reg_17` tinyint(1),
+        add column `reg_1E` varchar(4),
+        add column `reg_23` varchar(4),
+        add column `reg_27` varchar(4),
+        add column `reg_28` varchar(4),
+        add column `reg_29` varchar(4),
+        add column `reg_49` tinyint(1),
+        add column `reg_4A` varchar(4),
+        add column `reg_4B` varchar(4),
+        add column `reg_52` varchar(4),
+        add column `reg_8F` varchar(4),
+        add column `reg_93` varchar(4),
+        add column `reg_C0` tinyint(1),
+        add column `reg_C9` varchar(4),
+        add column `reg_CA` varchar(4);
+    </sql>
+    <rollback>
+      alter table `node_red_import`
+        drop column `reg_12`,
+        drop column `reg_13`,
+        drop column `reg_14`,
+        drop column `reg_15`,
+        drop column `reg_16`,
+        drop column `reg_17`,
+        drop column `reg_1E`,
+        drop column `reg_23`,
+        drop column `reg_27`,
+        drop column `reg_28`,
+        drop column `reg_29`,
+        drop column `reg_49`,
+        drop column `reg_4A`,
+        drop column `reg_4B`,
+        drop column `reg_52`,
+        drop column `reg_8F`,
+        drop column `reg_93`,
+        drop column `reg_C0`,
+        drop column `reg_C9`,
+        drop column `reg_CA`;
+    </rollback>
+  </changeSet>
+</databaseChangeLog>
