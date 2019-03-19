@@ -8,6 +8,7 @@ from alphorn import Alphorn
 
 from .models import Device, RawData
 from .utils.sqlalchemy import get_session, row2dict
+from .utils.etl import transform_imports
 
 app = Alphorn()
 
@@ -29,7 +30,7 @@ def get_devices():
 @app.route('/raw')
 def get_raw_data():
     session = get_session()
-    return [row2dict(row) for row in session.query(RawData).order_by(RawData.gbl_tsp.desc())[:20]]
+    return [transform_imports(row2dict(row)) for row in session.query(RawData).order_by(RawData.glb_tsp.desc())[:20]]
 
 
 @app.route('/readings/{device_id}')

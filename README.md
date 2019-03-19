@@ -81,7 +81,9 @@ create table devices (
 );
 ```
 
-we encourage (!) to add migrations to liquibase in the supported changeSet format so that the schema can be managed by the code, hence avoiding possible inconsistencies when changing the structure manually
+we encourage (!) to **add migrations to liquibase** in the supported changeSet format so that the schema can be managed by the code.
+
+**PLEASE NOTE!** if the database schema is changed manually, this will create inconsistencies with the migration tool and won't be manageable via the codebase!
 
 ## Lambda Backend
 
@@ -92,6 +94,8 @@ make lambda-readings
 ```
 
 the updated package is then deployed running the terraform script described in their specific sections above (via `terraform init`)
+
+**PLEASE NOTE!** before building the archive for deployment with the make command above, make sure to create a `.env` file containing the right db credential, this can be done copying the template `cd lambda/readings/ && cp .env.template .env` and filling it with values.
 
 ## Frontend
 
@@ -111,6 +115,12 @@ but for all options offered by [aws amplify](https://aws-amplify.github.io/), cd
 
 These are the API calls implemented in the Lambda backend that can be invoked by the Frontend
 
-- **/echo_vars**: shows the environment variables used by the Lambda function (DynamoDB table and MySQL endpoint)
-- **/devices**: reads content from MySQL reporting a list of rows stored in the `devices` table
-- **/readings/{device_id}** reads content from DynamoDB reporting all data stored in the past 15 days for the specific `{device_id}` in the path
+**/echo_vars**: shows the environment variables used by the Lambda function (DynamoDB table and MySQL endpoint)
+
+**/devices**: reads content from MySQL reporting a list of rows stored in the `devices` table
+
+![overview](./images/fe01_get_devices.png)
+
+**/readings/{device_id}** reads content from DynamoDB reporting all data stored in the past 15 days for the specific `{device_id}` in the path
+
+![overview](./images/fe02_get_raw_data.png)

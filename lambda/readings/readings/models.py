@@ -25,7 +25,7 @@ class RawData(Base):
 
     id = Column(Integer, primary_key=True)
 
-    gbl_tsp = Column(TIMESTAMP)
+    glb_tsp = Column(TIMESTAMP)
     gtw_mac_id = Column(String)
     pbx_mac_id = Column(String)
     reg_00 = Column(String)
